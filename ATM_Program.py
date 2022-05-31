@@ -45,7 +45,7 @@ def deposit(id):
   with open(id +".txt") as f:
     balance = f.readlines()
   try:
-    amount = int(input("Please enter amount: $"))
+    amount = int(input("Please enter amount to deposit, you currently $"+balance[0]+": $"))
   except:
     deposit(id)
 
@@ -64,7 +64,7 @@ def withdraw(id):
   with open(id +".txt") as f:
     balance = f.readlines()
   try:
-    amount = int(input("Please enter amount: $"))
+    amount = int(input("Please enter amount to withdraw, you currently $"+balance[0]+": $"))
   except:
     withdraw(id)
 
@@ -72,8 +72,7 @@ def withdraw(id):
     print("You cannot withdraw more than your total of $"+balance[0])
     withdraw(id)
 
-  int_balance = int(balance(0))
-  new_balance = int_balance - amount
+  new_balance = int(balance[0]) - amount
   fwrite = open(id + ".txt","w")
   fwrite.write(str(new_balance))
   fwrite.close

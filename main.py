@@ -1,4 +1,4 @@
-import Word_Counter
+import ATM_Program
 #import sys
 
 #if __name__ == "__main__":
