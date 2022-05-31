@@ -1,0 +1,81 @@
+# ATM program
+
+import os
+import sys
+
+def menu(id): 
+  print("Press 1 to view account balance\nPress 2 to withdraw\nPress 3 to deposit\nPress 4 to exit\n")
+  try:
+    choice = int(input())
+    if (choice == 1):
+      with open(id+".txt") as f:
+        account = f.readlines()
+        if account:
+          print("Your balance is $"+account[0])
+        else:
+          print("Your balance is $0")
+    elif (choice == 2):
+      withdraw(id)
+    elif (choice == 3):
+      deposit(id)
+    else:
+      print("Thank You! Goodbye.")
+      return
+    menu(id)
+  except:
+    menu(id)
+      
+def create_account(id):
+  fwrite = open(id + ".txt","w")
+  fwrite.write(str(0))
+  fwrite.close()
+  menu(id)
+
+def deposit(id):
+  new_balance = 0
+  with open(id +".txt") as f:
+    balance = f.readlines()
+  try:
+    amount = int(input("Please enter amount: $"))
+  except:
+    deposit(id)
+
+  else:
+    new_balance = int(balance[0]) + amount
+  fwrite = open(id + ".txt","w")
+  fwrite.write(str(new_balance))
+  fwrite.close
+  
+def withdraw(id):
+  new_balance = 0
+  with open(id +".txt") as f:
+    balance = f.readlines()
+  try:
+    amount = int(input("Please enter amount: $"))
+  except:
+    withdraw(id)
+
+  if amount > int(balance[0]):
+    print("You cannot withdraw more than your total of $"+balance[0])
+    withdraw(id)
+
+  int_balance = int(balance(0))
+  new_balance = int_balance - amount
+  fwrite = open(id + ".txt","w")
+  fwrite.write(str(new_balance))
+  fwrite.close
+  
+def start():
+  try:
+    id = int(input("Please enter your bank ID: "))
+    sid = str(id)
+    if os.path.isfile(str(id)+ ".txt"):
+      menu(sid)
+    else:
+      create_account(sid)
+  except:
+    start()
+
+    
+start()
+  
